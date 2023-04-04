@@ -14,8 +14,34 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@pages/*": ["./src/pages/*"],
+    },
   },
   "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "types": ["node"]
 }
+
+// {
+//   "compilerOptions": {
+//     "baseUrl": ".",
+//     "paths": {
+//       "@atoms/*": ["./src/atoms/*"],
+//       "@components/*": ["./src/components/*"],
+//       "@containers/*": ["./src/containers/*"],
+//       "@workers/*": ["./src/_workers/*"],
+//       "@pages/*": ["./src/pages/*"],
+//       "@t/*": ["./src/types/*"],
+//       "@services/*": ["./src/_services/*"],
+//       "@hooks/*": ["./src/_helpers/hooks/*"],
+//       "@helpers/*": ["./src/_helpers/*"],
+//       "@store/*": ["./src/_store/*"],
+//       "@assets/*": ["./src/assets/*"],
+//       "@root/*": ["./src/*"],
+//       "@styles/*": ["./src/components/_styles/*"]
+//     }
+//   }
+// }
