@@ -9,7 +9,7 @@ type Props = {
   children: ReactNode
 }
 
-const Page = ({ header, footer, className, children }: Props) => {
+const Page = ({ header = true, footer = true, className, children }: Props) => {
   return (
     <>
       {header && <Header />}
