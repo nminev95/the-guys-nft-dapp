@@ -1,0 +1,19 @@
+@import '_variables.scss';
+@import '_mixins.scss';
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $base-font-family;
+
+  p,
+  ul,
+  ol {
+    @include font-size($p-font-sizes);
+  }
+
+  h1 {
+    @include font-size($h1-font-sizes);
+  }
+}

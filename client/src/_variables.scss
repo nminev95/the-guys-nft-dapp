@@ -1,0 +1,21 @@
+$base-font-family: 'TT Norms', 'San Francisco', Helvetica, Arial;
+
+$breakpoints: (
+  small: 480px,
+  medium: 640px,
+  large: 1024px
+);
+
+$p-font-sizes: (
+  null: 14px,
+  small: 15px,
+  medium: 16px,
+  large: 17px
+);
+
+$h1-font-sizes: (
+  null: 28px,
+  small: 31px,
+  medium: 33px,
+  large: 36px
+);

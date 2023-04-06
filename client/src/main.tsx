@@ -4,15 +4,15 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import Home from '@pages/Home/Home'
 
-import './index.css'
+import './index.scss'
 import ErrorPage from '@pages/ErrorPage/ErrorPage'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Home />,
-    errorElement: <ErrorPage />,
-  },
+    errorElement: <ErrorPage />
+  }
 ])
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
