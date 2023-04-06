@@ -2,11 +2,14 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'node:path'
 
+const pathAliases = ['pages', 'components']
+
 export default defineConfig({
   plugins: [react()],
   resolve: {
-    alias: {
-      '@pages': path.resolve(__dirname, 'src/pages'),
-    },
-  },
+    alias: pathAliases.reduce((aliasesObject, alias) => {
+      aliasesObject[`@${alias}`] = path.resolve(__dirname, `src/${alias}`)
+      return aliasesObject
+    }, {})
+  }
 })

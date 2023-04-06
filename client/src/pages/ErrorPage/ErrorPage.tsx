@@ -4,7 +4,7 @@ const ErrorPage = () => {
   const error = useRouteError()
 
   return (
-    <div className="error-page">
+    <div className="the-guys-error-page">
       <h1>Oops!</h1>
       <p>Sorry, an unexpected error has occurred.</p>
       <p>

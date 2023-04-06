@@ -1,8 +1,10 @@
+import Page from '@components/common/Page/Page'
+
 const Home = () => {
   return (
-    <div className="the-guys-home">
+    <Page className="the-guys-home-page">
       <p>HOMEEE</p>
-    </div>
+    </Page>
   )
 }
 
