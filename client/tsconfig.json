@@ -17,10 +17,14 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@pages/*": ["./src/pages/*"],
-    },
+      "@pages/*": ["./src/pages/*"]
+    }
   },
   "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ],
   "types": ["node"]
 }
