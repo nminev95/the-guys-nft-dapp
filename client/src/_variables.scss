@@ -3,14 +3,14 @@ $canvas-default-background: #0d1117;
 $header-default-background: #161b22;
 
 $radius-variants: (
-  xs3: 2,
-  xs2: 4,
-  xs: 8,
-  x: 12,
-  m: 16,
-  l: 24,
+  'xs3': 2,
+  'xs2': 4,
+  'xs': 8,
+  'x': 12,
+  'm': 16,
+  'l': 24,
   'xl': 32px,
-  circle: 100
+  'circle': 100
 );
 
 $breakpoints: (
