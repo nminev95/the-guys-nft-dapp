@@ -1,9 +1,9 @@
 import Button from '@components/common/Button/Button'
 import './Header.scss'
-import { useEthersContext } from '@providers/EthersProvider'
+import { useEthers } from '@providers/EthersProvider/EthersProvider'
 
 const Header = () => {
-  const { handleConnectWalletButtonClick } = useEthersContext()
+  const { handleConnectWalletButtonClick } = useEthers()
   return (
     <div className="the-guys-header">
       <p>Logo goessshereee</p>

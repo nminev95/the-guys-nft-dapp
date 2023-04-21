@@ -2,13 +2,9 @@ import cn from 'classnames'
 import './Notification.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
+import { NotificationState } from '@providers/NotificationProvider/NotificationProvider.types'
 
-type Props = {
-  type: 'error' | 'warning | success'
-  text: string
-  hideDelay?: number
-  autoHide?: boolean
-}
+type Props = NotificationState
 
 const Notification = ({
   type,

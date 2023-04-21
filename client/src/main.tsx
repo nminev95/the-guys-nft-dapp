@@ -6,7 +6,8 @@ import Home from '@pages/Home/Home'
 
 import './index.scss'
 import ErrorPage from '@pages/ErrorPage/ErrorPage'
-import EthersContextProvider from './providers/EthersProvider'
+import EthersContextProvider from './providers/EthersProvider/EthersProvider'
+import NotificationProvider from '@providers/NotificationProvider/NotificationProvider'
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <EthersContextProvider>
-      <RouterProvider router={router} />
+      <NotificationProvider>
+        <RouterProvider router={router} />
+      </NotificationProvider>
     </EthersContextProvider>
   </React.StrictMode>
 )

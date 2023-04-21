@@ -1,18 +1,9 @@
 import { createContext, useContext, useState } from 'react'
 import ethers from 'ethers'
-type Props = {
-  children: React.ReactNode
-}
-
-type State = {
-  web3Provider: any
-}
-
-type CustomState = {
-  handleConnectWalletButtonClick: () => Promise<void>
-}
-
-type ProviderState = State & CustomState
+import {
+  Props,
+  ProviderState
+} from '@providers/EthersProvider/EthersProvider.types'
 
 const EthersContext = createContext<ProviderState>({} as ProviderState)
 
@@ -45,6 +36,6 @@ const EthersContextProvider = ({ children }: Props) => {
   )
 }
 
-export const useEthersContext = () => useContext(EthersContext)
+export const useEthers = () => useContext(EthersContext)
 
 export default EthersContextProvider
