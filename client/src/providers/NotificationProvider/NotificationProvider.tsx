@@ -1,24 +1,34 @@
 import React, { useState, useCallback, useContext } from 'react'
 import {
   NotificationState,
+  NotificationType,
   Props,
   ProviderState
 } from '@providers/NotificationProvider/NotificationProvider.types'
 
+const initialState = {
+  isVisible: false,
+  text: '',
+  type: NotificationType.WARNING,
+  hideNotification: () => {}
+}
+
 const NotificationContext = React.createContext({} as ProviderState)
 
 const NotificationProvider = ({ children }: Props) => {
-  const [notificationState, setNotificationState] = useState<NotificationState>(
-    {} as NotificationState
+  const [notificationState, setNotificationState] =
+    useState<NotificationState>(initialState)
+
+  const showNotification = useCallback(
+    (notificationState: NotificationState) => {
+      setNotificationState(notificationState)
+    },
+    []
   )
 
-  const showNotification = (notificationState: NotificationState) => {
-    setNotificationState(notificationState)
-  }
-
-  const hideNotification = () => {
+  const hideNotification = useCallback(() => {
     setNotificationState({} as NotificationState)
-  }
+  }, [])
 
   return (
     <NotificationContext.Provider

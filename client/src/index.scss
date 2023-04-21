@@ -8,6 +8,7 @@ body {
   font-family: $base-font-family;
   background-color: $canvas-default-background;
   box-sizing: border-box;
+  overflow: hidden;
 
   p,
   ul,

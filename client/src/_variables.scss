@@ -33,6 +33,13 @@ $h1-font-sizes: (
   large: 36px
 );
 
+$svg-icon-font-size: (
+  null: 20px,
+  small: 23px,
+  medium: 25px,
+  large: 28px
+);
+
 @function radius($variant: 'm') {
   $value: map-get($radius-variants, $variant);
   @return $value;

@@ -1,13 +1,20 @@
+export enum NotificationType {
+  ERROR = 'error',
+  WARNING = 'warning',
+  SUCCESS = 'success'
+}
+
 export type Props = {
   children: React.ReactNode
 }
 
 export type NotificationState = {
   text: string
-  type: 'error' | 'warning' | 'success'
-  isVisible: false
+  type: NotificationType
+  isVisible: boolean
   hideDelay?: number
   autoHide?: boolean
+  hideNotification: () => void
 }
 
 export type ProviderState = {

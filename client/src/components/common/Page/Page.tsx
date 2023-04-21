@@ -19,7 +19,7 @@ const Page = ({ header = true, footer = true, className, children }: Props) => {
     <>
       {header && <Header />}
       <div className={className}>{children}</div>
-      <Notification {{...notificationState}} />
+      <Notification {...notificationState} />
       {footer && <Footer />}
     </>
   )
