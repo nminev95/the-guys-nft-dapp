@@ -1,34 +1,50 @@
-import { ethers } from 'ethers'
-import { createContext, useState } from 'react'
-
+import { createContext, useContext, useState } from 'react'
+import ethers from 'ethers'
 type Props = {
   children: React.ReactNode
 }
 
-type EthersContextType = {
-  provider: any
-  signer: any
+type State = {
+  web3Provider: any
 }
 
-const EthersContext = createContext<EthersContextType>({
-  provider: null,
-  signer: null
-})
+type CustomState = {
+  handleConnectWalletButtonClick: () => Promise<void>
+}
+
+type ProviderState = State & CustomState
+
+const EthersContext = createContext<ProviderState>({} as ProviderState)
 
 const EthersContextProvider = ({ children }: Props) => {
   const [web3Provider, setWeb3Provider] = useState(null)
-  const initialContext: EthersContextType = {
-    provider: null,
-    signer: null
+
+  const handleConnectWalletButtonClick = async () => {
+    if (window.ethereum == null) {
+      alert('METAMASK INSTALL!!')
+    } else {
+      const provider = new ethers.BrowserProvider(window.ethereum)
+
+      // It also provides an opportunity to request access to write
+      // operations, which will be performed by the private key
+      // that MetaMask manages for the user.
+      const signer = await provider.getSigner()
+      // new ethers
+    }
   }
 
-  console.log('test')
-  // const provider = new ethers.BrowserProvider(window)
   return (
-    <EthersContext.Provider value={initialContext}>
+    <EthersContext.Provider
+      value={{
+        web3Provider,
+        handleConnectWalletButtonClick
+      }}
+    >
       {children}
     </EthersContext.Provider>
   )
 }
+
+export const useEthersContext = () => useContext(EthersContext)
 
 export default EthersContextProvider
