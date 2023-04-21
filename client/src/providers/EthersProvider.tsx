@@ -21,7 +21,8 @@ const EthersContextProvider = ({ children }: Props) => {
     provider: null,
     signer: null
   }
-  
+
+  console.log('test')
   // const provider = new ethers.BrowserProvider(window)
   return (
     <EthersContext.Provider value={initialContext}>
