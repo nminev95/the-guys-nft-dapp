@@ -10,6 +10,10 @@ body {
   box-sizing: border-box;
   overflow: hidden;
 
+  p {
+    margin: 0;
+  }
+
   p,
   ul,
   ol,

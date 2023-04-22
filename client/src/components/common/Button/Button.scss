@@ -1,7 +1,20 @@
+@import '../../../_variables.scss';
 .Button {
   button {
+    padding: 6px 14px;
     border: none;
-    background: blue;
-    border-radius: 10px;
+    background: $primary-background;
+    color: #66fcf1;
+    font-weight: 600;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+    border: transparent;
+
+    &:hover {
+      background: #00000050;
+      color: #4abbb3;
+    }
   }
 }

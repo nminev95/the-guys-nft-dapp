@@ -1,0 +1,17 @@
+@import '../../_variables.scss';
+.ConnectWalletButton {
+  .connected-wallet-button-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1px;
+    border-radius: 8px;
+    background: $secondary-background;
+    color: #66fcf1;
+  }
+
+  .connected-wallet-button-balance {
+    padding: 0px 10px;
+    font-weight: 600;
+  }
+}
