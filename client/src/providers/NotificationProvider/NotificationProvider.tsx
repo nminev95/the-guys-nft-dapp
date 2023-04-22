@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useContext } from 'react'
 import {
   NotificationState,
-  NotificationType,
   Props,
   ProviderState
 } from '@providers/NotificationProvider/NotificationProvider.types'
@@ -9,7 +8,7 @@ import {
 const initialState = {
   isVisible: false,
   text: '',
-  type: NotificationType.WARNING,
+  type: undefined,
   hideNotification: () => {}
 }
 
@@ -27,7 +26,7 @@ const NotificationProvider = ({ children }: Props) => {
   )
 
   const hideNotification = useCallback(() => {
-    setNotificationState({} as NotificationState)
+    setNotificationState(initialState)
   }, [])
 
   return (

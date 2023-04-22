@@ -1,15 +1,29 @@
-import './Button.scss'
+import { Button as MaterialButton, ButtonProps } from '@mui/material'
 
-type Props = {
-  text: string
-  onClick: () => void
-}
+// type Props = ButtonProps & {
+//   text: string
+//   size:
+//   onClick: () => void
+// }
 
-const Button = ({ text, onClick }: Props) => {
+const Button = ({
+  children,
+  variant = 'outlined',
+  size = 'medium',
+  onClick,
+  ...props
+}: ButtonProps) => {
   return (
-    <button className="Button" onClick={onClick}>
-      {text}
-    </button>
+    <div className="Button">
+      <MaterialButton
+        {...props}
+        variant={variant}
+        size={size}
+        onClick={onClick}
+      >
+        {children}
+      </MaterialButton>
+    </div>
   )
 }
 

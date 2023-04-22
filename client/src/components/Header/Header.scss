@@ -5,6 +5,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 16px;
-  background-color: $header-default-background;
+  padding: 15px 25px;
+  -webkit-box-shadow: 0 4px 6px -6px #9f9f9f;
+  -moz-box-shadow: 0 4px 6px -6px #9f9f9f;
+  box-shadow: 0 4px 6px -6px #9f9f9f;
+  background-color: $secondary-background;
 }

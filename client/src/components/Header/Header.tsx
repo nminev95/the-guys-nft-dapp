@@ -7,7 +7,18 @@ const Header = () => {
   return (
     <div className="the-guys-header">
       <p>Logo goessshereee</p>
-      <Button text="Connect wallet" onClick={handleConnectWalletButtonClick} />
+      <Button
+        sx={{
+          textTransform: 'capitalize',
+          letterSpacing: '0.5px',
+          fontWeight: 600
+        }}
+        variant="contained"
+        color="secondary"
+        onClick={handleConnectWalletButtonClick}
+      >
+        Connect Wallet
+      </Button>
     </div>
   )
 }

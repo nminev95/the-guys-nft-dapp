@@ -1,4 +1,7 @@
+import { AlertColor } from '@mui/material/Alert'
+
 export enum NotificationType {
+  INFO = 'info',
   ERROR = 'error',
   WARNING = 'warning',
   SUCCESS = 'success'
@@ -10,7 +13,7 @@ export type Props = {
 
 export type NotificationState = {
   text: string
-  type: NotificationType
+  type: AlertColor | undefined
   isVisible: boolean
   hideDelay?: number
   autoHide?: boolean
