@@ -1,41 +1,56 @@
-import { createContext, useContext, useState } from 'react'
-import { ethers } from 'ethers'
+import { createContext, useContext, useState, useRef, useEffect } from 'react'
+import { BrowserProvider, ethers } from 'ethers'
 import {
   Props,
   ProviderState
 } from '@providers/EthersProvider/EthersProvider.types'
-import { useNotification } from '@providers/NotificationProvider/NotificationProvider'
-import { NotificationType } from '@providers/NotificationProvider/NotificationProvider.types'
+import jazzicon from '@metamask/jazzicon'
+import useNotification from '@utils/hooks/useNotification'
 
 const EthersContext = createContext<ProviderState>({} as ProviderState)
 
 export const EthersContextProvider = ({ children }: Props) => {
-  const { showNotification, hideNotification } = useNotification()
-  const [web3Provider, setWeb3Provider] = useState(null)
+  const { generateWarningMessage, generateSuccessMessage } = useNotification()
+  const [signer, setSigner] = useState<ethers.JsonRpcSigner | null>(null)
+  const [provider, setProvider] = useState<BrowserProvider | null>(null)
+
+  useEffect(() => {
+    const checkConnection = async () => {
+      const accounts = (await window.ethereum.request({
+        method: 'eth_accounts'
+      })) as string[]
+      if (accounts.length) {
+        const ethersProvider = new ethers.BrowserProvider(window.ethereum)
+        setProvider(ethersProvider)
+        const ethersSigner = await ethersProvider.getSigner()
+        setSigner(ethersSigner)
+      }
+    }
+    if (window.ethereum?.isConnected()) {
+      checkConnection()
+    }
+    window.ethereum?.on('chainChanged', (chainId: any) => console.log(chainId))
+  }, [])
 
   const handleConnectWalletButtonClick = async () => {
     if (window.ethereum == null) {
-      showNotification({
-        text: 'Please install MetaMask in order to connect your wallet.',
-        type: NotificationType.WARNING,
-        isVisible: true,
-        hideNotification
-      })
+      generateWarningMessage(
+        'Please install MetaMask in order to connect your wallet.'
+      )
     } else {
-      const provider = new ethers.BrowserProvider(window.ethereum)
-
-      // It also provides an opportunity to request access to write
-      // operations, which will be performed by the private key
-      // that MetaMask manages for the user.
-      const signer = await provider.getSigner()
-      // new ethers
+      const ethersProvider = new ethers.BrowserProvider(window.ethereum)
+      setProvider(ethersProvider)
+      const ethersSigner = await ethersProvider.getSigner()
+      setSigner(ethersSigner)
+      generateSuccessMessage('Wallet connected succesfully.')
     }
   }
 
   return (
     <EthersContext.Provider
       value={{
-        web3Provider,
+        signer,
+        provider,
         handleConnectWalletButtonClick
       }}
     >

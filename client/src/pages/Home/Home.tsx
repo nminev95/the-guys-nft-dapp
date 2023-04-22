@@ -6,7 +6,7 @@ const Home = () => {
   console.log(window)
 
   return (
-    <Page className="the-guys-home-page">
+    <Page className="Home">
       <p>HOMEEE</p>
     </Page>
   )

@@ -2,9 +2,8 @@ import { ReactNode } from 'react'
 
 import Footer from '@components/Footer/Footer'
 import Header from '@components/Header/Header'
-import Notification from '@components/common/Notification/Notification'
-import { useNotification } from '@providers/NotificationProvider/NotificationProvider'
-
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 type Props = {
   header?: boolean
   footer?: boolean
@@ -13,13 +12,23 @@ type Props = {
 }
 
 const Page = ({ header = true, footer = true, className, children }: Props) => {
-  const { notificationState } = useNotification()
-
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover
+        theme="colored"
+      />
       {header && <Header />}
       <div className={className}>{children}</div>
-      <Notification {...notificationState} />
+
       {footer && <Footer />}
     </>
   )
