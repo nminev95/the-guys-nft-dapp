@@ -2,10 +2,11 @@ import jazzicon from '@metamask/jazzicon'
 import { useEthers } from '@providers/EthersProvider/EthersProvider'
 import { useEffect, useRef } from 'react'
 
+import './MetaMaskAvatar.scss'
+
 const MetaMaskAvatar = () => {
   const avatarRef = useRef<HTMLDivElement>()
   const { signer } = useEthers()
-  // const { account } = useEthers()
 
   useEffect(() => {
     if (signer && avatarRef.current) {
@@ -16,7 +17,7 @@ const MetaMaskAvatar = () => {
     }
   }, [signer])
 
-  return <div ref={avatarRef as any} />
+  return <div className="MetaMaskAvatar" ref={avatarRef as any} />
 }
 
 export default MetaMaskAvatar

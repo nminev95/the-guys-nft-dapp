@@ -8,6 +8,17 @@
     border-radius: 8px;
     background: $secondary-background;
     color: #66fcf1;
+
+    button {
+      gap: 8px;
+
+      &:hover {
+        .MetaMaskAvatar {
+          transition: all 0.3 ease-out;
+          opacity: 0.7;
+        }
+      }
+    }
   }
 
   .connected-wallet-button-balance {

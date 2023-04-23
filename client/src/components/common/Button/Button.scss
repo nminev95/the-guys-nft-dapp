@@ -1,6 +1,8 @@
 @import '../../../_variables.scss';
 .Button {
   button {
+    display: flex;
+    align-items: center;
     padding: 6px 14px;
     border: none;
     background: $primary-background;
@@ -11,10 +13,12 @@
     cursor: pointer;
     transition: all 0.3s ease-out;
     border: transparent;
+    border: 1px solid $primary-background;
 
     &:hover {
       background: #00000050;
       color: #4abbb3;
+      border: 1px solid #4abbb350;
     }
   }
 }

@@ -45,6 +45,8 @@ export const EthersContextProvider = ({ children }: Props) => {
       setProvider(ethersProvider)
       const ethersSigner = await ethersProvider.getSigner()
       setSigner(ethersSigner)
+      const balance = await ethersProvider.getBalance(ethersSigner.address)
+      setBalance(formatEther(balance))
       generateSuccessMessage('Wallet connected succesfully.')
     }
   }

@@ -19,6 +19,7 @@ body {
   ol,
   button {
     @include font-size($p-font-sizes);
+    letter-spacing: 0.8px;
   }
 
   h1 {
