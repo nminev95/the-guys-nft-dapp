@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.5.5",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
@@ -16,10 +17,8 @@
     "@metamask/jazzicon": "^2.0.0",
     "classnames": "^2.3.2",
     "ethers": "^6.2.3",
-    "jazzicon": "^1.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-jazzicon": "^1.0.4",
     "react-router-dom": "^6.10.0",
     "react-toastify": "^9.1.2",
     "sass": "^1.60.0"

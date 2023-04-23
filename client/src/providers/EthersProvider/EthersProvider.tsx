@@ -4,7 +4,6 @@ import {
   Props,
   ProviderState
 } from '@providers/EthersProvider/EthersProvider.types'
-import jazzicon from '@metamask/jazzicon'
 import useNotification from '@utils/hooks/useNotification'
 
 const EthersContext = createContext<ProviderState>({} as ProviderState)

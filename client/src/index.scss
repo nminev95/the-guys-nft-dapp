@@ -1,28 +1,28 @@
-@import '_variables.scss';
-@import '_mixins.scss';
+// @import '_variables.scss';
+// @import '_mixins.scss';
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-  font-family: $base-font-family;
-  background-color: $primary-background;
-  box-sizing: border-box;
-  overflow: hidden;
+// html,
+// body {
+//   // margin: 0;
+//   // padding: 0;
+//   // font-family: $base-font-family;
+//   // background-color: $primary-background;
+//   // box-sizing: border-box;
+//   // overflow: hidden;
 
-  p {
-    margin: 0;
-  }
+//   p {
+//     margin: 0;
+//   }
 
-  p,
-  ul,
-  ol,
-  button {
-    @include font-size($p-font-sizes);
-    letter-spacing: 0.8px;
-  }
+//   p,
+//   ul,
+//   ol,
+//   button {
+//     @include font-size($p-font-sizes);
+//     letter-spacing: 0.8px;
+//   }
 
-  h1 {
-    @include font-size($h1-font-sizes);
-  }
-}
+//   h1 {
+//     @include font-size($h1-font-sizes);
+//   }
+// }

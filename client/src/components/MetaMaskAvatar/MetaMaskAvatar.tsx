@@ -2,7 +2,7 @@ import jazzicon from '@metamask/jazzicon'
 import { useEthers } from '@providers/EthersProvider/EthersProvider'
 import { useEffect, useRef } from 'react'
 
-import './MetaMaskAvatar.scss'
+import { Box } from '@chakra-ui/react'
 
 const MetaMaskAvatar = () => {
   const avatarRef = useRef<HTMLDivElement>()
@@ -17,7 +17,14 @@ const MetaMaskAvatar = () => {
     }
   }, [signer])
 
-  return <div className="MetaMaskAvatar" ref={avatarRef as any} />
+  return (
+    <Box
+      display="flex"
+      alignItems="center"
+      className="MetaMaskAvatar"
+      ref={avatarRef as any}
+    />
+  )
 }
 
 export default MetaMaskAvatar

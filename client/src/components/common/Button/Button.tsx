@@ -1,17 +1,25 @@
-import { ReactNode } from 'react'
-import './Button.scss'
+import {
+  Button as ChakraButton,
+  useColorModeValue,
+  ButtonProps
+} from '@chakra-ui/react'
 
-type Props = {
-  variant: 'primary' | 'secondary'
-  children: ReactNode
-  onClick: () => void
-}
+const Button = ({ children, onClick }: ButtonProps) => {
+  const bg = useColorModeValue('teal.600', 'gray.800')
+  const color = useColorModeValue('white', 'teal.200')
+  const hoverBg = useColorModeValue('teal.700', 'gray.700')
+  const hoverColor = useColorModeValue('gray.200', 'teal.100')
 
-const Button = ({ variant, children, onClick }: Props) => {
   return (
-    <div className="Button">
-      <button onClick={onClick}>{children}</button>
-    </div>
+    <ChakraButton
+      size={['xs', 'sm', 'md']}
+      bg={bg}
+      color={color}
+      onClick={onClick}
+      _hover={{ bg: hoverBg, color: hoverColor }}
+    >
+      {children}
+    </ChakraButton>
   )
 }
 

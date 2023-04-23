@@ -1,28 +1,28 @@
 @import '../../_variables.scss';
 .ConnectWalletButton {
   .connected-wallet-button-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1px;
-    border-radius: 8px;
-    background: $secondary-background;
-    color: #66fcf1;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    // padding: 1px;
+    // border-radius: 8px;
+    // background: $secondary-background;
+    // color: #66fcf1;
 
-    button {
-      gap: 8px;
+    // button {
+    //   gap: 8px;
 
-      &:hover {
-        .MetaMaskAvatar {
-          transition: all 0.3 ease-out;
-          opacity: 0.7;
-        }
-      }
-    }
+    //   &:hover {
+    //     .MetaMaskAvatar {
+    //       transition: all 0.3 ease-out;
+    //       opacity: 0.7;
+    //     }
+    //   }
+    // }
   }
 
-  .connected-wallet-button-balance {
-    padding: 0px 10px;
-    font-weight: 600;
-  }
+  // .connected-wallet-button-balance {
+  //   padding: 0px 10px;
+  //   font-weight: 600;
+  // }
 }

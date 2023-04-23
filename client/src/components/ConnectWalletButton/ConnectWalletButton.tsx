@@ -4,27 +4,31 @@ import MetaMaskAvatar from '@components/MetaMaskAvatar/MetaMaskAvatar'
 import Formatters from '@utils/helpers/formatters'
 
 import './ConnectWalletButton.scss'
+import Modal from '@components/common/Modal/Modal'
+import { Box, Text, useDisclosure } from '@chakra-ui/react'
 
 const ConnectWalletButton = () => {
   const { balance, provider, signer, handleConnectWalletButtonClick } =
     useEthers()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
-    <div className="ConnectWalletButton">
+    <Box>
       {signer ? (
-        <div className="connected-wallet-button-wrapper">
-          <p className="connected-wallet-button-balance">{balance} ETH</p>
-          <Button variant="primary" onClick={() => {}}>
-            <p>{Formatters.formatAccountAddressForShortView(signer.address)}</p>
+        <Box>
+          <Text>{balance} ETH</Text>
+          <Button onClick={onOpen}>
+            <Text>
+              {Formatters.formatAccountAddressForShortView(signer.address)}
+            </Text>
             <MetaMaskAvatar />
           </Button>
-        </div>
+        </Box>
       ) : (
-        <Button variant="primary" onClick={handleConnectWalletButtonClick}>
-          Connect wallet
-        </Button>
+        <Button onClick={handleConnectWalletButtonClick}>Connect wallet</Button>
       )}
-    </div>
+      <Modal isOpen={isOpen} onClose={onClose} />
+    </Box>
   )
 }
 
