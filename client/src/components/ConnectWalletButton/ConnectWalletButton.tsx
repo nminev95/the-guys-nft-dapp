@@ -3,29 +3,52 @@ import Button from '@components/common/Button/Button'
 import MetaMaskAvatar from '@components/MetaMaskAvatar/MetaMaskAvatar'
 import Formatters from '@utils/helpers/formatters'
 
-import './ConnectWalletButton.scss'
 import Modal from '@components/common/Modal/Modal'
-import { Box, Text, useDisclosure } from '@chakra-ui/react'
+import { Box, useDisclosure } from '@chakra-ui/react'
+import Paragraph from '@components/common/Text/Paragraph'
 
 const ConnectWalletButton = () => {
-  const { balance, provider, signer, handleConnectWalletButtonClick } =
-    useEthers()
+  const { balance, signer, handleConnectWalletButtonClick } = useEthers()
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <Box>
       {signer ? (
-        <Box>
-          <Text>{balance} ETH</Text>
-          <Button onClick={onOpen}>
-            <Text>
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          borderRadius="lg"
+          background="additional.transparentBlack"
+          padding="px"
+        >
+          <Paragraph
+            paddingLeft="3"
+            paddingRight="2"
+            color="teal.200"
+            fontWeight="semibold"
+          >
+            {balance} ETH
+          </Paragraph>
+          <Button
+            display="flex"
+            alignItems="center"
+            gap="2"
+            border="1px"
+            borderColor="teal.800"
+            size="sm"
+            onClick={onOpen}
+          >
+            <Paragraph>
               {Formatters.formatAccountAddressForShortView(signer.address)}
-            </Text>
+            </Paragraph>
             <MetaMaskAvatar />
           </Button>
         </Box>
       ) : (
-        <Button onClick={handleConnectWalletButtonClick}>Connect wallet</Button>
+        <Button size="sm" onClick={handleConnectWalletButtonClick}>
+          Connect wallet
+        </Button>
       )}
       <Modal isOpen={isOpen} onClose={onClose} />
     </Box>

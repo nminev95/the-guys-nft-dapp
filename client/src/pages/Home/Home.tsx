@@ -1,7 +1,5 @@
 import Page from '@components/common/Page/Page'
 
-import './Home.scss'
-
 const Home = () => {
   console.log(window)
 

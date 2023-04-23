@@ -1,11 +1,16 @@
 import { extendTheme } from '@chakra-ui/react'
-// 2. Add your color mode config
-const config = {
-  initialColorMode: 'system',
-  useSystemColorMode: false
-}
+
 const theme = extendTheme({
-  config,
+  config: {
+    initialColorMode: 'system',
+    useSystemColorMode: false
+  },
+  colors: {
+    additional: {
+      heavyBlackCustom: '#0b0c10',
+      transparentBlack: '#272f36c2'
+    }
+  },
   styles: {
     global: {
       'html, body': {
@@ -18,33 +23,13 @@ const theme = extendTheme({
         margin: 0
       },
       '.chakra-ui-dark': {
-        background: 'black'
+        background: 'additional.heavyBlackCustom'
       },
       '.chakra-ui-light': {
-        background: 'gray.200'
+        background: 'gray.300'
       }
-    }
-  },
-  colors: {
-    background: {
-      primary: '#f7fafc',
-      secondary: '#1a202c'
     }
   }
 })
 
 export default theme
-
-// const theme = extendTheme({
-//   fonts: {
-//     body: 'Poppins'
-//   },
-//   styles: {
-//     global: {
-//       'html, body': {
-//         height: '100vh',
-//         backgroundColor: 'gray.50'
-//       }
-//     }
-//   }
-// })

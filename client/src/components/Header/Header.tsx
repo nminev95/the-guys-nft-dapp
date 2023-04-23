@@ -3,9 +3,13 @@ import Button from '@components/common/Button/Button'
 import { useEthers } from '@providers/EthersProvider/EthersProvider'
 import ConnectWalletButton from '@components/ConnectWalletButton/ConnectWalletButton'
 import { useColorMode } from '@chakra-ui/react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
+import Paragraph from '@components/common/Text/Paragraph'
 
 const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode()
+  console.log(window?.ethereum)
   return (
     <Box
       fontSize={['sm', 'md', 'lg']}
@@ -16,12 +20,16 @@ const Header = () => {
       boxShadow="0 4px 6px -6px #9f9f9f"
       padding="15px 25px"
     >
-      {/* <div ref={avatarRef}></div> */}
-      <p>Logo goessshereee</p>
-      <Button onClick={toggleColorMode}>
-        Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
-      </Button>
-      <ConnectWalletButton />
+      <Box />
+      <Box display="flex" alignItems="center" gap="3">
+        {/* <Box>
+          <Paragraph>Goerli</Paragraph>
+        </Box> */}
+        <ConnectWalletButton />
+        <Button size="sm" onClick={toggleColorMode}>
+          <FontAwesomeIcon icon={colorMode === 'dark' ? faMoon : faSun} />
+        </Button>
+      </Box>
     </Box>
   )
 }

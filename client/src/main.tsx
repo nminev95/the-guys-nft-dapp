@@ -5,7 +5,6 @@ import { ColorModeScript } from '@chakra-ui/react'
 
 import Home from '@pages/Home/Home'
 
-import './index.scss'
 import ErrorPage from '@pages/ErrorPage/ErrorPage'
 import { EthersContextProvider } from '@providers/EthersProvider/EthersProvider'
 import { ChakraProvider } from '@chakra-ui/react'
