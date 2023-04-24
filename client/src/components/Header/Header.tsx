@@ -6,9 +6,11 @@ import { useColorMode } from '@chakra-ui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
 import Paragraph from '@components/common/Text/Paragraph'
+import Network from '@components/Network/Network'
 
 const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode()
+  const { chain } = useEthers()
   console.log(window?.ethereum)
   return (
     <Box
@@ -25,6 +27,7 @@ const Header = () => {
         {/* <Box>
           <Paragraph>Goerli</Paragraph>
         </Box> */}
+        {chain?.name && <Network network={chain?.name} />}
         <ConnectWalletButton />
         <Button size="sm" onClick={toggleColorMode}>
           <FontAwesomeIcon icon={colorMode === 'dark' ? faMoon : faSun} />

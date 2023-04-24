@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useRef, useEffect } from 'react'
-import { BrowserProvider, ethers, formatEther } from 'ethers'
+import { BrowserProvider, Network, ethers, formatEther } from 'ethers'
 import {
   Props,
   ProviderState
@@ -12,6 +12,7 @@ export const EthersContextProvider = ({ children }: Props) => {
   const { generateWarningMessage, generateSuccessMessage } = useNotification()
   const [signer, setSigner] = useState<ethers.JsonRpcSigner | null>(null)
   const [provider, setProvider] = useState<BrowserProvider | null>(null)
+  const [chain, setChain] = useState<Network | null>(null)
   const [balance, setBalance] = useState('')
 
   useEffect(() => {
@@ -26,9 +27,8 @@ export const EthersContextProvider = ({ children }: Props) => {
         setSigner(ethersSigner)
         const balance = await ethersProvider.getBalance(ethersSigner.address)
         setBalance(formatEther(balance))
-        const { chainId, name } = await ethersProvider?.getNetwork()
-        console.log(name)
-        console.log(name)
+        const network = await ethersProvider?.getNetwork()
+        setChain(network)
       }
     }
     if (window.ethereum?.isConnected()) {
@@ -67,6 +67,7 @@ export const EthersContextProvider = ({ children }: Props) => {
         signer,
         provider,
         balance,
+        chain,
         handleConnectWalletButtonClick
       }}
     >
