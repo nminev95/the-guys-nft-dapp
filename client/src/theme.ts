@@ -8,7 +8,8 @@ const theme = extendTheme({
   colors: {
     additional: {
       heavyBlackCustom: '#0b0c10',
-      transparentBlack: '#272f36c2'
+      transparentBlack: '#272f36c2',
+      secondaryText: '#C5C6C7'
     }
   },
   styles: {
@@ -26,7 +27,7 @@ const theme = extendTheme({
         background: 'additional.heavyBlackCustom'
       },
       '.chakra-ui-light': {
-        background: 'gray.300'
+        background: 'gray.200'
       }
     }
   }

@@ -3,9 +3,9 @@ import Button from '@components/common/Button/Button'
 import MetaMaskAvatar from '@components/MetaMaskAvatar/MetaMaskAvatar'
 import Formatters from '@utils/helpers/formatters'
 
-import Modal from '@components/common/Modal/Modal'
-import { Box, useDisclosure } from '@chakra-ui/react'
-import Paragraph from '@components/common/Text/Paragraph'
+import { Box, Modal, useDisclosure } from '@chakra-ui/react'
+import Paragraph, { ParagraphType } from '@components/common/Text/Paragraph'
+import AccountModal from '@components/AccountModal/AccountModal'
 
 const ConnectWalletButton = () => {
   const { balance, signer, handleConnectWalletButtonClick } = useEthers()
@@ -23,12 +23,12 @@ const ConnectWalletButton = () => {
           padding="px"
         >
           <Paragraph
+            variant={ParagraphType.PRIMARY}
             paddingLeft="3"
             paddingRight="2"
-            color="teal.200"
             fontWeight="semibold"
           >
-            {balance} ETH
+            {Formatters.formatEtherBalance(balance)} ETH
           </Paragraph>
           <Button
             display="flex"
@@ -39,18 +39,22 @@ const ConnectWalletButton = () => {
             size="sm"
             onClick={onOpen}
           >
-            <Paragraph>
+            <Paragraph variant={ParagraphType.PRIMARY}>
               {Formatters.formatAccountAddressForShortView(signer.address)}
             </Paragraph>
             <MetaMaskAvatar />
           </Button>
+          <AccountModal
+            address={signer.address}
+            isOpen={isOpen}
+            onClose={onClose}
+          />
         </Box>
       ) : (
         <Button size="sm" onClick={handleConnectWalletButtonClick}>
           Connect wallet
         </Button>
       )}
-      <Modal isOpen={isOpen} onClose={onClose} />
     </Box>
   )
 }

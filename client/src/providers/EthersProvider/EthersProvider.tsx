@@ -26,12 +26,21 @@ export const EthersContextProvider = ({ children }: Props) => {
         setSigner(ethersSigner)
         const balance = await ethersProvider.getBalance(ethersSigner.address)
         setBalance(formatEther(balance))
+        const { chainId, name } = await ethersProvider?.getNetwork()
+        console.log(name)
+        console.log(name)
       }
     }
     if (window.ethereum?.isConnected()) {
       checkConnection()
     }
-    window.ethereum?.on('chainChanged', (chainId: any) => console.log(chainId))
+    window.ethereum?.on('chainChanged', async (chainId: any) => {
+      const accounts = (await window.ethereum.request({
+        method: 'eth_accounts'
+      })) as string[]
+      console.log(accounts)
+      console.log(chainId)
+    })
   }, [])
 
   const handleConnectWalletButtonClick = async () => {
@@ -45,6 +54,8 @@ export const EthersContextProvider = ({ children }: Props) => {
       const ethersSigner = await ethersProvider.getSigner()
       setSigner(ethersSigner)
       const balance = await ethersProvider.getBalance(ethersSigner.address)
+      const network = await provider?.getNetwork()
+      console.log(network)
       setBalance(formatEther(balance))
       generateSuccessMessage('Wallet connected succesfully.')
     }
