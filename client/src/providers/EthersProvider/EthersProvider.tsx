@@ -1,14 +1,42 @@
-import { createContext, useContext, useState, useRef, useEffect } from 'react'
-import { BrowserProvider, Network, ethers, formatEther } from 'ethers'
+import {
+  createContext,
+  useContext,
+  useState,
+  useRef,
+  useEffect,
+  useReducer
+} from 'react'
+import {
+  BrowserProvider,
+  Network,
+  ethers,
+  formatEther,
+  ProviderEvent
+} from 'ethers'
 import {
   Props,
   ProviderState
 } from '@providers/EthersProvider/EthersProvider.types'
 import useNotification from '@utils/hooks/useNotification'
+import Helpers from '@utils/helpers/helpers'
 
-const EthersContext = createContext<ProviderState>({} as ProviderState)
+const initialState = {
+  signer: null,
+  provider: null,
+  balance: '',
+  chain: null,
+  handleConnectWalletButtonClick: async () => {}
+}
+
+const EthersContext = createContext<ProviderState>(initialState)
+
+const reducer = (state, action) => {
+  switch (action.type) {
+  }
+}
 
 export const EthersContextProvider = ({ children }: Props) => {
+  const [state, dispatch] = useReducer(reducer, initialState)
   const { generateWarningMessage, generateSuccessMessage } = useNotification()
   const [signer, setSigner] = useState<ethers.JsonRpcSigner | null>(null)
   const [provider, setProvider] = useState<BrowserProvider | null>(null)
@@ -27,6 +55,7 @@ export const EthersContextProvider = ({ children }: Props) => {
         setSigner(ethersSigner)
         const balance = await ethersProvider.getBalance(ethersSigner.address)
         setBalance(formatEther(balance))
+        const address = await ethersSigner.getAddress()
         const network = await ethersProvider?.getNetwork()
         setChain(network)
       }
@@ -34,12 +63,40 @@ export const EthersContextProvider = ({ children }: Props) => {
     if (window.ethereum?.isConnected()) {
       checkConnection()
     }
-    window.ethereum?.on('chainChanged', async (chainId: any) => {
+  }, [])
+
+  useEffect(() => {
+    window.ethereum?.on('chainChanged', async () => {
+      console.log('chain change')
+      const ethersProvider = new ethers.BrowserProvider(window.ethereum)
+      setProvider(ethersProvider)
+      const ethersSigner = await ethersProvider.getSigner()
+      setSigner(ethersSigner)
+      const balance = await ethersProvider.getBalance(ethersSigner.address)
+      setBalance(formatEther(balance))
+      const network = await ethersProvider?.getNetwork()
+      setChain(network)
+    })
+    window.ethereum.on('accountsChanged', async () => {
       const accounts = (await window.ethereum.request({
         method: 'eth_accounts'
       })) as string[]
-      console.log(accounts)
-      console.log(chainId)
+      if (accounts.length) {
+        console.log(accounts)
+        const ethersProvider = new ethers.BrowserProvider(window.ethereum)
+        setProvider(ethersProvider)
+        const ethersSigner = await ethersProvider.getSigner()
+        setSigner(ethersSigner)
+        const balance = await ethersProvider.getBalance(ethersSigner.address)
+        setBalance(formatEther(balance))
+        const network = await ethersProvider?.getNetwork()
+        setChain(network)
+      } else {
+        setProvider(null)
+        setSigner(null)
+        setBalance('')
+        setChain(null)
+      }
     })
   }, [])
 
@@ -49,13 +106,11 @@ export const EthersContextProvider = ({ children }: Props) => {
         'Please install MetaMask in order to connect your wallet.'
       )
     } else {
-      const ethersProvider = new ethers.BrowserProvider(window.ethereum)
+      const { ethersProvider, ethersSigner, balance, network, address } =
+        await Helpers.extractMetamaskData()
       setProvider(ethersProvider)
-      const ethersSigner = await ethersProvider.getSigner()
       setSigner(ethersSigner)
-      const balance = await ethersProvider.getBalance(ethersSigner.address)
-      const network = await provider?.getNetwork()
-      console.log(network)
+      setChain(network)
       setBalance(formatEther(balance))
       generateSuccessMessage('Wallet connected succesfully.')
     }
