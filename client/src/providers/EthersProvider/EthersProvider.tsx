@@ -30,8 +30,18 @@ const initialState = {
 
 const EthersContext = createContext<ProviderState>(initialState)
 
+enum ACTIONS {
+  SET_SIGNER = 'setSigner',
+  SET_PROVIDER = 'setProvider',
+  SET_NETWORK = 'setNetwork',
+  SET_BALANCE = 'setBalance',
+  SET_ADDRESS = 'setAddress'
+}
+
 const reducer = (state, action) => {
   switch (action.type) {
+    case ACTIONS.SET_SIGNER:
+      return { ...state, signer: }
   }
 }
 
