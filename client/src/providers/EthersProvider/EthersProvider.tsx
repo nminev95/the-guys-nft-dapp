@@ -108,6 +108,28 @@ export const EthersContextProvider = ({ children }: Props) => {
         setChain(null)
       }
     })
+
+    window.ethereum.off('accountsChanged', async () => {
+      const accounts = (await window.ethereum.request({
+        method: 'eth_accounts'
+      })) as string[]
+      if (accounts.length) {
+        console.log(accounts)
+        const ethersProvider = new ethers.BrowserProvider(window.ethereum)
+        setProvider(ethersProvider)
+        const ethersSigner = await ethersProvider.getSigner()
+        setSigner(ethersSigner)
+        const balance = await ethersProvider.getBalance(ethersSigner.address)
+        setBalance(formatEther(balance))
+        const network = await ethersProvider?.getNetwork()
+        setChain(network)
+      } else {
+        setProvider(null)
+        setSigner(null)
+        setBalance('')
+        setChain(null)
+      }
+    })
   }, [])
 
   const handleConnectWalletButtonClick = async () => {
