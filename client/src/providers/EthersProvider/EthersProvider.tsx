@@ -4,7 +4,8 @@ import {
   useState,
   useRef,
   useEffect,
-  useReducer
+  useReducer,
+  useCallback
 } from 'react'
 import {
   BrowserProvider,
@@ -15,7 +16,8 @@ import {
 } from 'ethers'
 import {
   Props,
-  ProviderState
+  ProviderState,
+  State
 } from '@providers/EthersProvider/EthersProvider.types'
 import useNotification from '@utils/hooks/useNotification'
 import Helpers from '@utils/helpers/helpers'
@@ -24,34 +26,26 @@ const initialState = {
   signer: null,
   provider: null,
   balance: '',
-  chain: null,
+  network: null,
   handleConnectWalletButtonClick: async () => {}
 }
 
-const EthersContext = createContext<ProviderState>(initialState)
-
-enum ACTIONS {
-  SET_SIGNER = 'setSigner',
-  SET_PROVIDER = 'setProvider',
-  SET_NETWORK = 'setNetwork',
-  SET_BALANCE = 'setBalance',
-  SET_ADDRESS = 'setAddress'
-}
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case ACTIONS.SET_SIGNER:
-      return { ...state, signer: }
-  }
-}
+const EthersContext = createContext<State>(initialState)
 
 export const EthersContextProvider = ({ children }: Props) => {
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [providerState, setProviderState] =
+    useState<ProviderState>(initialState)
   const { generateWarningMessage, generateSuccessMessage } = useNotification()
-  const [signer, setSigner] = useState<ethers.JsonRpcSigner | null>(null)
-  const [provider, setProvider] = useState<BrowserProvider | null>(null)
-  const [chain, setChain] = useState<Network | null>(null)
-  const [balance, setBalance] = useState('')
+
+  const populateProviderState = useCallback(async () => {
+    const { provider, signer, balance, network } =
+      await Helpers.extractMetamaskData()
+    setProviderState({ provider, signer, balance, network })
+  }, [])
+
+  const resetProviderState = useCallback(async () => {
+    setProviderState(initialState)
+  }, [])
 
   useEffect(() => {
     const checkConnection = async () => {
@@ -59,15 +53,7 @@ export const EthersContextProvider = ({ children }: Props) => {
         method: 'eth_accounts'
       })) as string[]
       if (accounts.length) {
-        const ethersProvider = new ethers.BrowserProvider(window.ethereum)
-        setProvider(ethersProvider)
-        const ethersSigner = await ethersProvider.getSigner()
-        setSigner(ethersSigner)
-        const balance = await ethersProvider.getBalance(ethersSigner.address)
-        setBalance(formatEther(balance))
-        const address = await ethersSigner.getAddress()
-        const network = await ethersProvider?.getNetwork()
-        setChain(network)
+        await populateProviderState()
       }
     }
     if (window.ethereum?.isConnected()) {
@@ -76,60 +62,25 @@ export const EthersContextProvider = ({ children }: Props) => {
   }, [])
 
   useEffect(() => {
-    window.ethereum?.on('chainChanged', async () => {
-      console.log('chain change')
-      const ethersProvider = new ethers.BrowserProvider(window.ethereum)
-      setProvider(ethersProvider)
-      const ethersSigner = await ethersProvider.getSigner()
-      setSigner(ethersSigner)
-      const balance = await ethersProvider.getBalance(ethersSigner.address)
-      setBalance(formatEther(balance))
-      const network = await ethersProvider?.getNetwork()
-      setChain(network)
-    })
-    window.ethereum.on('accountsChanged', async () => {
-      const accounts = (await window.ethereum.request({
-        method: 'eth_accounts'
-      })) as string[]
-      if (accounts.length) {
-        console.log(accounts)
-        const ethersProvider = new ethers.BrowserProvider(window.ethereum)
-        setProvider(ethersProvider)
-        const ethersSigner = await ethersProvider.getSigner()
-        setSigner(ethersSigner)
-        const balance = await ethersProvider.getBalance(ethersSigner.address)
-        setBalance(formatEther(balance))
-        const network = await ethersProvider?.getNetwork()
-        setChain(network)
-      } else {
-        setProvider(null)
-        setSigner(null)
-        setBalance('')
-        setChain(null)
+    const handleAccountChange = async () => {
+      ;async () => {
+        const accounts = (await window.ethereum.request({
+          method: 'eth_accounts'
+        })) as string[]
+        if (accounts.length) {
+          await populateProviderState()
+        } else {
+          resetProviderState()
+        }
       }
-    })
+    }
+    window.ethereum.on('chainChanged', populateProviderState)
+    window.ethereum.on('accountsChanged', handleAccountChange)
 
-    window.ethereum.off('accountsChanged', async () => {
-      const accounts = (await window.ethereum.request({
-        method: 'eth_accounts'
-      })) as string[]
-      if (accounts.length) {
-        console.log(accounts)
-        const ethersProvider = new ethers.BrowserProvider(window.ethereum)
-        setProvider(ethersProvider)
-        const ethersSigner = await ethersProvider.getSigner()
-        setSigner(ethersSigner)
-        const balance = await ethersProvider.getBalance(ethersSigner.address)
-        setBalance(formatEther(balance))
-        const network = await ethersProvider?.getNetwork()
-        setChain(network)
-      } else {
-        setProvider(null)
-        setSigner(null)
-        setBalance('')
-        setChain(null)
-      }
-    })
+    return () => {
+      window.ethereum.off('chainChanged', populateProviderState)
+      window.ethereum.off('accountsChanged', handleAccountChange)
+    }
   }, [])
 
   const handleConnectWalletButtonClick = async () => {
@@ -138,12 +89,7 @@ export const EthersContextProvider = ({ children }: Props) => {
         'Please install MetaMask in order to connect your wallet.'
       )
     } else {
-      const { ethersProvider, ethersSigner, balance, network, address } =
-        await Helpers.extractMetamaskData()
-      setProvider(ethersProvider)
-      setSigner(ethersSigner)
-      setChain(network)
-      setBalance(formatEther(balance))
+      await populateProviderState()
       generateSuccessMessage('Wallet connected succesfully.')
     }
   }
@@ -151,10 +97,7 @@ export const EthersContextProvider = ({ children }: Props) => {
   return (
     <EthersContext.Provider
       value={{
-        signer,
-        provider,
-        balance,
-        chain,
+        ...providerState,
         handleConnectWalletButtonClick
       }}
     >

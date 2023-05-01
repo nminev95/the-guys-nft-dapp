@@ -8,6 +8,11 @@ export type ProviderState = {
   signer: ethers.JsonRpcSigner | null
   provider: BrowserProvider | null
   balance: string
-  chain: Network | null
+  network: Network | null
+}
+
+export type CustomState = {
   handleConnectWalletButtonClick: () => Promise<void>
 }
+
+export type State = ProviderState & CustomState

@@ -1,16 +1,16 @@
-import { ethers } from 'ethers'
+import { ethers, formatEther } from 'ethers'
 
 const extractMetamaskData = async () => {
-  const ethersProvider = new ethers.BrowserProvider(window.ethereum)
-  const ethersSigner = await ethersProvider.getSigner()
-  const balance = await ethersProvider.getBalance(ethersSigner.address)
-  const address = await ethersSigner.getAddress()
-  const network = await ethersProvider?.getNetwork()
+  const provider = new ethers.BrowserProvider(window.ethereum)
+  const signer = await provider.getSigner()
+  const balance = await provider.getBalance(signer.address)
+  const address = await signer.getAddress()
+  const network = await provider?.getNetwork()
 
   return {
-    ethersProvider,
-    ethersSigner,
-    balance,
+    provider,
+    signer,
+    balance: formatEther(balance),
     address,
     network
   }
