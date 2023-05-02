@@ -28,6 +28,9 @@ const theme = extendTheme({
       },
       '.chakra-ui-light': {
         background: 'gray.200'
+      },
+      '#root': {
+        height: '100vh'
       }
     }
   }

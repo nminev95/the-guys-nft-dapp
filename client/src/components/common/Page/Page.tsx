@@ -4,6 +4,7 @@ import Footer from '@components/Footer/Footer'
 import Header from '@components/Header/Header'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { Box } from '@chakra-ui/react'
 type Props = {
   header?: boolean
   footer?: boolean
@@ -27,7 +28,14 @@ const Page = ({ header = true, footer = true, className, children }: Props) => {
         theme="colored"
       />
       {header && <Header />}
-      <div className={className}>{children}</div>
+      <Box
+        className={className}
+        height="calc(100vh - 120px)"
+        position="relative"
+        padding="15px 25px"
+      >
+        {children}
+      </Box>
 
       {footer && <Footer />}
     </>
