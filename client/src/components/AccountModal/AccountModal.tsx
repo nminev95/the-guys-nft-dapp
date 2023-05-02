@@ -18,6 +18,7 @@ import MetaMaskAvatar from '@components/MetaMaskAvatar/MetaMaskAvatar'
 import { faCopy, faShareFromSquare } from '@fortawesome/free-regular-svg-icons'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useEthers } from '@providers/EthersProvider/EthersProvider'
 import Formatters from '@utils/helpers/formatters'
 import { useEffect } from 'react'
 
@@ -29,6 +30,7 @@ type Props = {
 
 const AccountModal = ({ address, isOpen, onClose }: Props) => {
   const { onCopy, hasCopied, setValue } = useClipboard('')
+  const { resetProviderState } = useEthers()
 
   useEffect(() => {
     setValue(address)
@@ -82,6 +84,7 @@ const AccountModal = ({ address, isOpen, onClose }: Props) => {
                   borderColor: 'teal.600',
                   color: 'teal.300'
                 }}
+                onClick={resetProviderState}
               >
                 Disconnect
               </Button>

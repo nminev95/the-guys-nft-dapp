@@ -13,6 +13,7 @@ export type ProviderState = {
 
 export type CustomState = {
   handleConnectWalletButtonClick: () => Promise<void>
+  resetProviderState: () => void
 }
 
 export type State = ProviderState & CustomState

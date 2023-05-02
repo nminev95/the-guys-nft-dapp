@@ -2,18 +2,9 @@ import {
   createContext,
   useContext,
   useState,
-  useRef,
   useEffect,
-  useReducer,
   useCallback
 } from 'react'
-import {
-  BrowserProvider,
-  Network,
-  ethers,
-  formatEther,
-  ProviderEvent
-} from 'ethers'
 import {
   Props,
   ProviderState,
@@ -27,6 +18,7 @@ const initialState = {
   provider: null,
   balance: '',
   network: null,
+  resetProviderState: () => {},
   handleConnectWalletButtonClick: async () => {}
 }
 
@@ -63,23 +55,21 @@ export const EthersContextProvider = ({ children }: Props) => {
 
   useEffect(() => {
     const handleAccountChange = async () => {
-      ;async () => {
-        const accounts = (await window.ethereum.request({
-          method: 'eth_accounts'
-        })) as string[]
-        if (accounts.length) {
-          await populateProviderState()
-        } else {
-          resetProviderState()
-        }
+      const accounts = (await window.ethereum.request({
+        method: 'eth_accounts'
+      })) as string[]
+      if (accounts.length) {
+        await populateProviderState()
+      } else {
+        resetProviderState()
       }
     }
     window.ethereum.on('chainChanged', populateProviderState)
     window.ethereum.on('accountsChanged', handleAccountChange)
 
     return () => {
-      window.ethereum.off('chainChanged', populateProviderState)
-      window.ethereum.off('accountsChanged', handleAccountChange)
+      window.ethereum.removeListener('chainChanged', populateProviderState)
+      window.ethereum.removeListener('accountsChanged', handleAccountChange)
     }
   }, [])
 
@@ -89,7 +79,16 @@ export const EthersContextProvider = ({ children }: Props) => {
         'Please install MetaMask in order to connect your wallet.'
       )
     } else {
-      await populateProviderState()
+      const res = await window.ethereum.request({
+        method: 'wallet_requestPermissions',
+        params: [
+          {
+            eth_accounts: {}
+          }
+        ]
+      })
+      console.log(res)
+      // await populateProviderState()
       generateSuccessMessage('Wallet connected succesfully.')
     }
   }
@@ -98,6 +97,7 @@ export const EthersContextProvider = ({ children }: Props) => {
     <EthersContext.Provider
       value={{
         ...providerState,
+        resetProviderState,
         handleConnectWalletButtonClick
       }}
     >

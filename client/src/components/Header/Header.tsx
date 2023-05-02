@@ -10,7 +10,7 @@ import Network from '@components/Network/Network'
 
 const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode()
-  const { chain } = useEthers()
+  const { network } = useEthers()
   console.log(window?.ethereum)
   return (
     <Box
@@ -24,10 +24,7 @@ const Header = () => {
     >
       <Box />
       <Box display="flex" alignItems="center" gap="3">
-        {/* <Box>
-          <Paragraph>Goerli</Paragraph>
-        </Box> */}
-        {chain?.name && <Network network={chain?.name} />}
+        {network?.name && <Network network={network?.name} />}
         <ConnectWalletButton />
         <Button size="sm" onClick={toggleColorMode}>
           <FontAwesomeIcon icon={colorMode === 'dark' ? faMoon : faSun} />
