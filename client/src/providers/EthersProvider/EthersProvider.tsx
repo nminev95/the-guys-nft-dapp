@@ -36,6 +36,7 @@ export const EthersContextProvider = ({ children }: Props) => {
   }, [])
 
   const resetProviderState = useCallback(async () => {
+    localStorage.setItem('webStatus', 'disconnected')
     setProviderState(initialState)
   }, [])
 
@@ -48,7 +49,10 @@ export const EthersContextProvider = ({ children }: Props) => {
         await populateProviderState()
       }
     }
-    if (window.ethereum?.isConnected()) {
+    if (
+      window.ethereum?.isConnected() &&
+      localStorage.getItem('webStatus') === 'neutral'
+    ) {
       checkConnection()
     }
   }, [])
@@ -62,6 +66,7 @@ export const EthersContextProvider = ({ children }: Props) => {
         await populateProviderState()
       } else {
         resetProviderState()
+        localStorage.setItem('webStatus', 'neutral')
       }
     }
     window.ethereum.on('chainChanged', populateProviderState)
@@ -78,8 +83,8 @@ export const EthersContextProvider = ({ children }: Props) => {
       generateWarningMessage(
         'Please install MetaMask in order to connect your wallet.'
       )
-    } else {
-      const res = await window.ethereum.request({
+    } else if (localStorage.getItem('webStatus') === 'disconnected') {
+      await window.ethereum.request({
         method: 'wallet_requestPermissions',
         params: [
           {
@@ -87,8 +92,10 @@ export const EthersContextProvider = ({ children }: Props) => {
           }
         ]
       })
-      console.log(res)
-      // await populateProviderState()
+      await populateProviderState()
+      localStorage.setItem('webStatus', 'neutral')
+    } else {
+      await populateProviderState()
       generateSuccessMessage('Wallet connected succesfully.')
     }
   }

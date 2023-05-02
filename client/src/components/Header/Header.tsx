@@ -11,7 +11,7 @@ import Network from '@components/Network/Network'
 const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode()
   const { network } = useEthers()
-  console.log(window?.ethereum)
+
   return (
     <Box
       fontSize={['sm', 'md', 'lg']}
