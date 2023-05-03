@@ -10,11 +10,12 @@ import img7 from '../../assets/images/7.jpg'
 
 import { useEffect, useRef, useState } from 'react'
 import InfiniteLooper from '@components/Footer/test'
+import InfiniteSlider from '@components/InfiniteSlider/InfiniteSlider'
 
 const Home = () => {
   return (
     <Page className="Home">
-      <InfiniteLooper speed={50} direction="right">
+      <InfiniteSlider speed={20} direction="right">
         <Image src={img1} boxSize="200px  " />
         <Image src={img2} boxSize="200px  " />
         <Image src={img3} boxSize="200px  " />
@@ -22,8 +23,8 @@ const Home = () => {
         <Image src={img5} boxSize="200px  " />
         <Image src={img6} boxSize="200px  " />
         <Image src={img7} boxSize="200px  " />
-      </InfiniteLooper>
-      <InfiniteLooper speed={50} direction="left">
+      </InfiniteSlider>
+      <InfiniteSlider speed={20} direction="left">
         <Image src={img1} boxSize="200px  " />
         <Image src={img2} boxSize="200px  " />
         <Image src={img3} boxSize="200px  " />
@@ -31,8 +32,8 @@ const Home = () => {
         <Image src={img5} boxSize="200px  " />
         <Image src={img6} boxSize="200px  " />
         <Image src={img7} boxSize="200px  " />
-      </InfiniteLooper>
-      <InfiniteLooper speed={50} direction="right">
+      </InfiniteSlider>
+      <InfiniteSlider speed={20} direction="right">
         <Image src={img1} boxSize="200px  " />
         <Image src={img2} boxSize="200px  " />
         <Image src={img3} boxSize="200px  " />
@@ -40,8 +41,8 @@ const Home = () => {
         <Image src={img5} boxSize="200px  " />
         <Image src={img6} boxSize="200px  " />
         <Image src={img7} boxSize="200px  " />
-      </InfiniteLooper>
-      <InfiniteLooper speed={50} direction="left">
+      </InfiniteSlider>
+      <InfiniteSlider speed={20} direction="left">
         <Image src={img1} boxSize="200px  " />
         <Image src={img2} boxSize="200px  " />
         <Image src={img3} boxSize="200px  " />
@@ -49,7 +50,7 @@ const Home = () => {
         <Image src={img5} boxSize="200px  " />
         <Image src={img6} boxSize="200px  " />
         <Image src={img7} boxSize="200px  " />
-      </InfiniteLooper>
+      </InfiniteSlider>
       <Box position="absolute" top="50%" left="50%" background="black">
         HERE MINT
       </Box>
