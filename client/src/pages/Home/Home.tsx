@@ -9,51 +9,273 @@ import img6 from '../../assets/images/6.jpg'
 import img7 from '../../assets/images/7.jpg'
 
 import { useEffect, useRef, useState } from 'react'
-import InfiniteLooper from '@components/Footer/test'
 import InfiniteSlider from '@components/InfiniteSlider/InfiniteSlider'
+import MintBox from '@components/MintBox/MintBox'
 
 const Home = () => {
   return (
     <Page className="Home">
-      <InfiniteSlider speed={20} direction="right">
-        <Image src={img1} boxSize="200px  " />
-        <Image src={img2} boxSize="200px  " />
-        <Image src={img3} boxSize="200px  " />
-        <Image src={img4} boxSize="200px  " />
-        <Image src={img5} boxSize="200px  " />
-        <Image src={img6} boxSize="200px  " />
-        <Image src={img7} boxSize="200px  " />
+      <InfiniteSlider speed={100} direction="right">
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img1}
+          boxSize="200px  "
+        />
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img3}
+          boxSize="200px  "
+        />
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img2}
+          boxSize="200px  "
+        />
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img4}
+          boxSize="200px  "
+        />
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img5}
+          boxSize="200px  "
+        />
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img6}
+          boxSize="200px  "
+        />
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img7}
+          boxSize="200px  "
+        />
       </InfiniteSlider>
-      <InfiniteSlider speed={20} direction="left">
-        <Image src={img1} boxSize="200px  " />
-        <Image src={img2} boxSize="200px  " />
-        <Image src={img3} boxSize="200px  " />
-        <Image src={img4} boxSize="200px  " />
-        <Image src={img5} boxSize="200px  " />
-        <Image src={img6} boxSize="200px  " />
-        <Image src={img7} boxSize="200px  " />
+      <InfiniteSlider speed={100} direction="left">
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img1}
+          boxSize="200px  "
+        />
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img2}
+          boxSize="200px  "
+        />
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img3}
+          boxSize="200px  "
+        />
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img4}
+          boxSize="200px  "
+        />
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img5}
+          boxSize="200px  "
+        />
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img6}
+          boxSize="200px  "
+        />
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img7}
+          boxSize="200px  "
+        />
       </InfiniteSlider>
-      <InfiniteSlider speed={20} direction="right">
-        <Image src={img1} boxSize="200px  " />
-        <Image src={img2} boxSize="200px  " />
-        <Image src={img3} boxSize="200px  " />
-        <Image src={img4} boxSize="200px  " />
-        <Image src={img5} boxSize="200px  " />
-        <Image src={img6} boxSize="200px  " />
-        <Image src={img7} boxSize="200px  " />
+      <InfiniteSlider speed={100} direction="right">
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img1}
+          boxSize="200px  "
+        />
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img2}
+          boxSize="200px  "
+        />
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img3}
+          boxSize="200px  "
+        />
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img4}
+          boxSize="200px  "
+        />
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img5}
+          boxSize="200px  "
+        />
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img6}
+          boxSize="200px  "
+        />
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img7}
+          boxSize="200px  "
+        />
       </InfiniteSlider>
-      <InfiniteSlider speed={20} direction="left">
-        <Image src={img1} boxSize="200px  " />
-        <Image src={img2} boxSize="200px  " />
-        <Image src={img3} boxSize="200px  " />
-        <Image src={img4} boxSize="200px  " />
-        <Image src={img5} boxSize="200px  " />
-        <Image src={img6} boxSize="200px  " />
-        <Image src={img7} boxSize="200px  " />
+      <InfiniteSlider speed={100} direction="left">
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img1}
+          boxSize="200px  "
+        />
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img2}
+          boxSize="200px  "
+        />
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img3}
+          boxSize="200px  "
+        />
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img4}
+          boxSize="200px  "
+        />
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img5}
+          boxSize="200px  "
+        />
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img6}
+          boxSize="200px  "
+        />
+        <Image
+          border="1px"
+          borderStyle="solid"
+          borderColor="teal.700"
+          borderRadius="3xl"
+          p={2}
+          src={img7}
+          boxSize="200px  "
+        />
       </InfiniteSlider>
-      <Box position="absolute" top="50%" left="50%" background="black">
-        HERE MINT
-      </Box>
+      <MintBox />
     </Page>
   )
 }

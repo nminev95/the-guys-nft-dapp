@@ -30,9 +30,9 @@ const Page = ({ header = true, footer = true, className, children }: Props) => {
       {header && <Header />}
       <Box
         className={className}
-        height="calc(100vh - 120px)"
+        // height="calc(100vh - 120px)"
         position="relative"
-        padding="15px 25px"
+        padding="15px 0px"
       >
         {children}
       </Box>

@@ -44,20 +44,21 @@ const InfiniteSlider = ({
   }, [])
 
   return (
-    <Box width="100%" overflow="hidden" ref={outerRef}>
+    <Box width="100%" overflow="hidden" ref={outerRef} opacity={0.8}>
       <Box width="fit-content" justifyContent="center" ref={innerRef}>
-        <Flex>
+        <Flex mb={3}>
           {[...Array(looperInstances)].map((_, ind) => (
             <Box
               key={ind}
               width="max-content"
               animation={infiniteSlideAnimation}
+              mr={3}
               sx={{
                 animationDuration: `${speed}s`,
                 animationDirection: direction === 'right' ? 'reverse' : 'normal'
               }}
             >
-              <Flex>{children}</Flex>
+              <Flex gap={3}>{children}</Flex>
             </Box>
           ))}
         </Flex>
