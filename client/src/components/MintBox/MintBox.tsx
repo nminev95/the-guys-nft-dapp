@@ -2,7 +2,7 @@ import { Box } from '@chakra-ui/react'
 import Button from '@components/common/Button/Button'
 import { useEthers } from '@providers/EthersProvider/EthersProvider'
 import { ethers, verifyMessage } from 'ethers'
-import Api from 'src/api/api'
+import Api from '@api/api'
 
 const height = 560
 const width = 420
@@ -42,9 +42,14 @@ const MintBox = () => {
       content: 'Hello!'
     }
     const signature = await signer?.signTypedData(domain, types, mail)
-    const res = await Api.sendSignature(signature)
     console.log(signature)
-    console.log(res)
+    console.log(signer?.address)
+    try {
+      const res = await Api.sendSignature(signature)
+      console.log(res)
+    } catch (e) {
+      console.log(e)
+    }
   }
   return (
     <Box
