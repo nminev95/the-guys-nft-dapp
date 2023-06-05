@@ -46,7 +46,7 @@ app.post('/mint/signature', (req, res) => {
   };
   const { signature } = req.body;
   console.log(signature);
-  console.log(keccak256(mail));
+  // console.log(keccak256(mail));
   const address = verifyTypedData(domain, types, mail, signature);
   console.log(address);
 });
