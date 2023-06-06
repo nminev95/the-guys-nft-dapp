@@ -9,6 +9,7 @@ import {
   verifyTypedData
 } from 'ethers'
 import Api from '@api/api'
+import { signTypedData } from '@metamask/eth-sig-util'
 
 const height = 560
 const width = 420
@@ -47,7 +48,9 @@ const MintBox = () => {
       },
       content: 'Hello!'
     }
+    // const sig = signTypedData({ privateKey: })
     const signature = await signer?.signTypedData(domain, types, mail)
+    console.log(signature)
     if (signature) {
       const address = verifyTypedData(domain, types, mail, signature)
     }

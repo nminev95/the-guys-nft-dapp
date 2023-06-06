@@ -84,14 +84,23 @@ export const EthersContextProvider = ({ children }: Props) => {
         'Please install MetaMask in order to connect your wallet.'
       )
     } else if (localStorage.getItem('webStatus') === 'disconnected') {
-      await window.ethereum.request({
-        method: 'wallet_requestPermissions',
-        params: [
+      const res = await providerState.provider?.send(
+        'wallet_requestPermissions',
+        [
           {
             eth_accounts: {}
           }
         ]
-      })
+      )
+      console.log(res)
+      // await window.ethereum.request({
+      //   method: 'wallet_requestPermissions',
+      //   params: [
+      //     {
+      //       eth_accounts: {}
+      //     }
+      //   ]
+      // })
       await populateProviderState()
       localStorage.setItem('webStatus', 'neutral')
     } else {

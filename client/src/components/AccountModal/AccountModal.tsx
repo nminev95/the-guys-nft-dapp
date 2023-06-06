@@ -36,6 +36,11 @@ const AccountModal = ({ address, isOpen, onClose }: Props) => {
     setValue(address)
   }, [address])
 
+  const handleDisconnect = () => {
+    resetProviderState()
+    onClose()
+  }
+
   return (
     <ChakraModal isCentered size="md" isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -84,7 +89,7 @@ const AccountModal = ({ address, isOpen, onClose }: Props) => {
                   borderColor: 'teal.600',
                   color: 'teal.300'
                 }}
-                onClick={resetProviderState}
+                onClick={handleDisconnect}
               >
                 Disconnect
               </Button>
