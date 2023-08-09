@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { verifyTypedData, ethers, hexlify, getBytes, keccak256 } from 'ethers';
 const app = express();
+
 app.use(express.json());
 app.use(
   cors({
@@ -15,14 +16,14 @@ app.get('/', (req, res) => {
 
 app.post('/mint/signature', (req, res) => {
   const domain = {
-    name: 'TheGuysNFT',
+    name: 'My App',
     version: '1.0.0',
-    chainId: 1,
+    chainId: 5,
     verifyingContract: '0x1111111111111111111111111111111111111111',
   };
 
   const types = {
-    'Mint NFT': [
+    Mail: [
       { name: 'from', type: 'Person' },
       { name: 'to', type: 'Person' },
       { name: 'content', type: 'string' },
@@ -44,11 +45,12 @@ app.post('/mint/signature', (req, res) => {
     },
     content: 'Hello!',
   };
-  const { signature } = req.body;
+
+  const { signature, signerAddress } = req.body;
   console.log(signature);
   // console.log(keccak256(mail));
   const address = verifyTypedData(domain, types, mail, signature);
-  console.log(address);
+  console.log(address === signerAddress);
 });
 const port = 3000;
 

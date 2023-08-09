@@ -89,16 +89,6 @@ export const EthersContextProvider = ({ children }: Props) => {
           eth_accounts: {}
         }
       ])
-      // console.log(res)
-      // const res2 = await window.ethereum.request({
-      //   method: 'wallet_requestPermissions',
-      //   params: [
-      //     {
-      //       eth_accounts: {}
-      //     }
-      //   ]
-      // })
-      // console.log(res2)
       await populateProviderState()
       localStorage.setItem('webStatus', 'neutral')
     } else {

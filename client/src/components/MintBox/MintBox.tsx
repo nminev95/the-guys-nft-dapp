@@ -2,9 +2,11 @@ import { Box } from '@chakra-ui/react'
 import Button from '@components/common/Button/Button'
 import { useEthers } from '@providers/EthersProvider/EthersProvider'
 import {
+  TypedDataEncoder,
   ethers,
   hexlify,
   keccak256,
+  recoverAddress,
   verifyMessage,
   verifyTypedData
 } from 'ethers'
@@ -19,14 +21,14 @@ const MintBox = () => {
 
   const handleMintButtonClick = async () => {
     const domain = {
-      name: 'TheGuysNFT',
+      name: 'My App',
       version: '1.0.0',
-      chainId: 1,
+      chainId: 5,
       verifyingContract: '0x1111111111111111111111111111111111111111'
     }
 
     const types = {
-      'Mint NFT': [
+      Mail: [
         { name: 'from', type: 'Person' },
         { name: 'to', type: 'Person' },
         { name: 'content', type: 'string' }
@@ -48,15 +50,16 @@ const MintBox = () => {
       },
       content: 'Hello!'
     }
-    // const sig = signTypedData({ privateKey: })
+
     const signature = await signer?.signTypedData(domain, types, mail)
+    // console.log(signer?.address)
     console.log(signature)
-    if (signature) {
-      const address = verifyTypedData(domain, types, mail, signature)
-    }
 
     try {
-      const res = await Api.sendSignature(signature)
+      const res = await Api.sendSignature({
+        signature,
+        signerAddress: signer?.address
+      })
       console.log(res)
     } catch (e) {
       console.log(e)
